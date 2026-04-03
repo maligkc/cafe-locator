@@ -2,7 +2,13 @@
 
 Konuma gore yakin kafeleri bulan, filtreleyen, listede ve haritada senkron gosteren modern bir web uygulamasi.
 
-## Ozellik Ozeti
+<img width="1708" height="872" alt="Ekran Resmi 2026-04-03 23 11 11" src="https://github.com/user-attachments/assets/24dcfa47-66ea-487f-ad73-34ac6513976f" />
+
+<br/>
+
+<img width="1709" height="869" alt="Ekran Resmi 2026-04-03 23 13 26" src="https://github.com/user-attachments/assets/2141fa9a-a19f-42e5-9250-30e2fe33db5e" />
+
+## Özellik Özeti
 
 - Kullanici konum izni ile yakin kafe arama
 - Filtreler: yaricap, minimum puan, sadece acik olanlar
