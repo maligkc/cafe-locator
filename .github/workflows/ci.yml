@@ -1,0 +1,42 @@
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Restore and build backend
+        run: |
+          dotnet restore backend/CafeLocator.Api/CafeLocator.Api.csproj
+          dotnet build backend/CafeLocator.Api/CafeLocator.Api.csproj --configuration Release --no-restore
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: frontend/cafe-locator-web/package-lock.json
+
+      - name: Install frontend dependencies
+        working-directory: frontend/cafe-locator-web
+        run: npm ci
+
+      - name: Build frontend
+        working-directory: frontend/cafe-locator-web
+        env:
+          VITE_API_BASE_URL: http://localhost:5010
+          VITE_GOOGLE_MAPS_API_KEY: dummy-key-for-ci
+        run: npm run build

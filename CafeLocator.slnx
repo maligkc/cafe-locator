@@ -1,0 +1,5 @@
+<Solution>
+  <Folder Name="/backend/">
+    <Project Path="backend/CafeLocator.Api/CafeLocator.Api.csproj" />
+  </Folder>
+</Solution>

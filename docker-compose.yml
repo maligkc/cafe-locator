@@ -1,0 +1,26 @@
+services:
+  api:
+    build:
+      context: ./backend/CafeLocator.Api
+      dockerfile: Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      GooglePlaces__ApiKey: ${GOOGLE_PLACES_API_KEY}
+      Cors__AllowedOrigins__0: ${WEB_ORIGIN}
+      RateLimiting__PermitLimitPerMinute: 90
+    ports:
+      - "5010:8080"
+    restart: unless-stopped
+
+  web:
+    build:
+      context: ./frontend/cafe-locator-web
+      dockerfile: Dockerfile
+      args:
+        VITE_API_BASE_URL: ${VITE_API_BASE_URL}
+        VITE_GOOGLE_MAPS_API_KEY: ${VITE_GOOGLE_MAPS_API_KEY}
+    ports:
+      - "5173:80"
+    depends_on:
+      - api
+    restart: unless-stopped
